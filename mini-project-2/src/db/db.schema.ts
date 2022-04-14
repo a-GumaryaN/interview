@@ -1,13 +1,19 @@
 import { Schema, model } from "mongoose";
-import { userInterface } from "../types/userInterface";
+import { SignalInterface, decisionInterface } from "../types/interfaces";
 
-const userSchema = new Schema<userInterface>({
+const signalSchema = new Schema<SignalInterface>({
     _id: { type: String, required: true },
-    password: { type: String, required: true },
-    fullName: { type: String, required: true },
-    bDate: { type: String },
+    signal_number: { type: String, required: true },
+    status: { type: String, required: true },
 });
 
-const userModel = model('user', userSchema);
+const decisionSchema = new Schema<decisionInterface>({
+    _id: { type: String, required: true },
+    analyst: { type: String, required: true },
+    signal: { type: String, required: true },
+    analyst_decision: { type: String, required: true },
+});
 
-export default userModel;
+export const decisionModel = model('decision', decisionSchema);
+
+export const signalModel = model('signal', signalSchema);

@@ -1,8 +1,6 @@
 import * as express from "express";
 import { createServer } from "http";
 import { connect } from "mongoose";
-import { graphqlHTTP } from "express-graphql";
-import { graphqlSchema } from "./graphql/graphql";
 
 class server {
     public app: any;
@@ -23,13 +21,6 @@ class server {
             console.log(`successfully connected to the database...`);
         });
 
-        this.app.use(
-            "/graphql",
-            graphqlHTTP({
-                schema: graphqlSchema,
-                graphiql: true,
-            })
-        );
 
         this.app.use("", (req, res) => {
             res.send("route not found...");
