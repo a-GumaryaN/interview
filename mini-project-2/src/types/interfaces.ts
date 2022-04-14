@@ -10,3 +10,9 @@ export interface decisionInterface {
     signal: string,
     analyst_decision: string,
 }
+
+export interface analystInterface {
+    analyst: string,
+    success_decisions: number,
+    all_decisions: number
+}

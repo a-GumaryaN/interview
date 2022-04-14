@@ -2,13 +2,13 @@ import { Schema, model } from "mongoose";
 import { SignalInterface, decisionInterface } from "../types/interfaces";
 
 const signalSchema = new Schema<SignalInterface>({
-    _id: { type: String, required: true },
+    _id: { type: String },
     signal_number: { type: String, required: true },
     status: { type: String, required: true },
 });
 
 const decisionSchema = new Schema<decisionInterface>({
-    _id: { type: String, required: true },
+    _id: { type: String },
     analyst: { type: String, required: true },
     signal: { type: String, required: true },
     analyst_decision: { type: String, required: true },
