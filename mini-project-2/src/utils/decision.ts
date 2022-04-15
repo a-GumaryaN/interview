@@ -1,23 +1,23 @@
 import { signalModel, decisionModel } from "../db/db.schema";
 import { SignalInterface, analystInterface, decisionInterface } from "../types/interfaces";
 
-const isAnalystExist = (analyst: string, analysts: analystInterface[]): boolean => {
+export const isAnalystExist = (analyst: string, analysts: analystInterface[]): boolean => {
+    let result: boolean = false;
     analysts.map(item => {
-        if (item.analyst === analyst) return true;
+        if (item.analyst === analyst) result = true;
     });
-    return false;
+    return result;
 }
 
-const findSignal = (signal_number: string, signals: SignalInterface[]): SignalInterface | boolean => {
+export const findSignal = (signal_number: string, signals: SignalInterface[]): SignalInterface | boolean => {
+    let result: boolean | SignalInterface = false;
     signals.map(item => {
-        if (item.signal_number === signal_number) return item;
+        if (item.signal_number === signal_number) result = item;
     });
-    console.log('signal not found');
-    return false
-
+    return result;
 }
 
-const change_analyst_info = (analyst: string, analysts: analystInterface[], isSuccess: boolean) => {
+export const change_analyst_info = (analyst: string, analysts: analystInterface[], isSuccess: boolean) => {
     analysts.map(item => {
         if (item.analyst === analyst) {
             item.all_decisions += 1;
@@ -27,9 +27,10 @@ const change_analyst_info = (analyst: string, analysts: analystInterface[], isSu
     });
 }
 
-export const scanAnalyst = async (): Promise<analystInterface[]> => {
-    const signals: SignalInterface[] = await signalModel.find();
-    const decisions: decisionInterface[] = await decisionModel.find();
+export const scanDecisions = (
+    decisions: decisionInterface[],
+    signals: SignalInterface[]
+) => {
 
     const analysts: analystInterface[] = [];
 
@@ -39,8 +40,7 @@ export const scanAnalyst = async (): Promise<analystInterface[]> => {
 
         if (typeof (signal) === 'object' && signal.status !== 'open') {
 
-
-            if (isAnalystExist(decision.analyst, analysts)) {
+            if (!isAnalystExist(decision.analyst, analysts)) {
 
                 if (signal.status === decision.analyst_decision) {
                     analysts.push({
@@ -68,6 +68,18 @@ export const scanAnalyst = async (): Promise<analystInterface[]> => {
         }
 
     });
+
+    return analysts;
+}
+
+
+export const getAndScanAnalyst = async (): Promise<analystInterface[]> => {
+
+    const signals: SignalInterface[] = await signalModel.find();
+
+    const decisions: decisionInterface[] = await decisionModel.find();
+
+    const analysts: analystInterface[] = scanDecisions(decisions, signals);
 
     return analysts;
 

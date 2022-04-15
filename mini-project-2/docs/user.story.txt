@@ -1,0 +1,7 @@
+user story for analyst :
+    as an analyst i want to set some decision in currency platform so that i can increase my points and make money
+
+acceptance criteria:
+    analysts(users) can set many decision in platform
+    analysts(users) can make money for they self if they set success decisions
+    
