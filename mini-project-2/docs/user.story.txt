@@ -1,7 +1,31 @@
 user story for analyst :
-    as an analyst i want to set some decision in currency platform so that i can increase my points and make money
+    register :
+        as a user i want to register in currency platform so that i can use platform
+    login:
+        as a user i can login into platform so that i can use platform , i previously register in platform.
+        as a user i can reset my password if i forgot it.
+    general profiles:
+        as a user i upload a profile image in my account.
+        as a user i can update my personal information in platform.
+        as a user i can delete my account.
+        as a user i can logout in my account.
+    analyst profile:
+        as an analyst i want check my valet in my profile account so i can check how much my credit.
+        as an analyst i want to set some decision in currency platform so that i can increase my points and make money.
+        
 
 acceptance criteria:
-    analysts(users) can set many decision in platform
-    analysts(users) can make money for they self if they set success decisions
+    register:
+        user should register into platform to use it.
+    login:
+        user should login into platform to use it.
+        user can reset their passwords.
+    general profile:
+        user can set a profile image for they self.
+        user can update they personal information.
+        user can delete his/her account.
+        user can log out.
+    analyst profile:
+        analysts(users) can set many decision in platform
+        analysts(users) can make money for they self if they set success decisions
     
